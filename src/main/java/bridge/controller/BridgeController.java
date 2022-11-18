@@ -30,14 +30,14 @@ public class BridgeController {
         while (!this.bridgeGame.isEnd()) {
             playTurn();
         }
-        printResultOfMove();
+        printResultOfGame();
     }
 //
     private void playTurn() {
         while (!this.bridgeGame.isOnWay()) {
             String moving = inputView.readMoving();
             this.bridgeGame.move(moving);
-            printResultOfGame();
+            printResultOfMove();
         }
         if (this.bridgeGame.isFail()) {
 //            retryTurn();
@@ -54,8 +54,8 @@ public class BridgeController {
         this.outputView.printMap(resultNow);
     }
 //
-//    private void printResultOfGame() {
-//        String resultNow = this.bridgeGame.getResult();
-//        this.outputView.printResult(resultNow);
-//    }
+    private void printResultOfGame() {
+        String resultNow = this.bridgeGame.getResult();
+        this.outputView.printResult(resultNow);
+    }
 }
