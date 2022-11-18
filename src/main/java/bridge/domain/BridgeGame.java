@@ -33,6 +33,7 @@ public class BridgeGame {
         this.tryCount += 1;
         if (isCorrect(moving)) {
             this.location += 1;
+            checkIsEnd();
             return;
         }
         this.gameStatus = FAIL;
@@ -60,5 +61,12 @@ public class BridgeGame {
 
     public boolean isEnd() {
         return this.gameStatus == END;
+    }
+
+    private void checkIsEnd() {
+        int bridgeSize = this.bridge.size();
+        if (bridgeSize == this.location) {
+            this.gameStatus = END;
+        }
     }
 }
