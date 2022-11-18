@@ -40,17 +40,17 @@ public class BridgeController {
         if (this.bridgeGame.isEnd()) {
             return;
         }
-        if (this.bridgeGame.isFail()) {
-//            retryTurn();
-        }
         printResultOfMove();
+        if (this.bridgeGame.isFail()) {
+            retryTurn();
+        }
     }
-//
-//    private void retryTurn() {
-//       String inputGameCommand = inputView.readGameCommand();
-//       this.bridgeGame.retry(inputGameCommand);
-//    }
-//
+
+    private void retryTurn() {
+       String inputGameCommand = inputView.readGameCommand();
+       this.bridgeGame.retry(inputGameCommand);
+    }
+
     private void printResultOfMove() {
         List<String> userRecord = this.bridgeGame.getUserRecord();
         boolean isCorrect = this.bridgeGame.isOnWay();
