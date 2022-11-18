@@ -14,7 +14,6 @@ import java.util.List;
 public class BridgeGame {
     private final List<String> bridge;
     private GameStatus gameStatus;
-    boolean isEnd;
     private List<String> userRecord;
     private int tryCount;
 
@@ -22,7 +21,7 @@ public class BridgeGame {
         this.bridge = bridge;
         this.gameStatus = ON_WAY;
         this.userRecord = new ArrayList<>();
-        this.tryCount = 0;
+        this.tryCount = 1;
         System.out.println(this.bridge);
     }
 
@@ -41,7 +40,6 @@ public class BridgeGame {
     }
 
     private void recordMoving(String moving) {
-        this.tryCount += 1;
         userRecord.add(moving);
     }
 
@@ -57,6 +55,7 @@ public class BridgeGame {
      */
     public void retry(String inputGameCommand) {
         if (inputGameCommand.equals("R")) {
+            this.tryCount += 1;
             this.gameStatus = ON_WAY;
             int userRecordSize = this.userRecord.size();
             this.userRecord.remove(userRecordSize - 1);
@@ -109,5 +108,9 @@ public class BridgeGame {
         int bridgeSize = this.bridge.size();
         int userTrackingSize = this.userRecord.size();
         return bridgeSize == userTrackingSize;
+    }
+
+    public int getTryCount() {
+        return this.tryCount;
     }
 }

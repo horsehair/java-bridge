@@ -21,6 +21,7 @@ public class BridgeMaker {
      * @return 입력받은 길이에 해당하는 다리 모양. 위 칸이면 "U", 아래 칸이면 "D"로 표현해야 한다.
      */
     public List<String> makeBridge(int size) {
+        validate(size);
         List<String> bridge = new ArrayList<>();
         IntStream.range(0, size)
                 .forEach(number -> {
@@ -35,5 +36,12 @@ public class BridgeMaker {
             return "D";
         }
         return "U";
+    }
+
+    private void validate(int size) {
+        if (3 <= size && size <= 20) {
+            return;
+        }
+        throw new IllegalArgumentException("[ERROR] 3과 20 사이 숫자를 입력하세요.");
     }
 }

@@ -36,6 +36,7 @@ public class BridgeController {
         }
         outputView.announceEndGame();
         printResultOfMove();
+        printResultOfGame();
     }
 
     private void playTurn() {
@@ -65,9 +66,10 @@ public class BridgeController {
         }
         this.outputView.printMap(userRecord, isCorrect);
     }
-//
-//    private void printResultOfGame() {
-//        List<String> resultNow = this.bridgeGame.getUserRecord();
-//        this.outputView.printResult(resultNow);
-//    }
+
+    private void printResultOfGame() {
+        boolean isSuccess = this.bridgeGame.checkIsRightEnd();
+        int tryCount = this.bridgeGame.getTryCount();
+        this.outputView.printResult(isSuccess, tryCount);
+    }
 }

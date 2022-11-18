@@ -14,9 +14,13 @@ public class InputView {
      * 다리의 길이를 입력받는다.
      */
     public int readBridgeSize() {
-        System.out.println(INPUT_BRIDGE_SIZE_ANNOUNCEMENT);
-        int bridgeSize = Integer.parseInt(Console.readLine());
-        return bridgeSize;
+        try {
+            System.out.println(INPUT_BRIDGE_SIZE_ANNOUNCEMENT);
+            int bridgeSize = Integer.parseInt(Console.readLine());
+            return bridgeSize;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 입력이 잘못되었습니다.");
+        }
     }
 
     /**
