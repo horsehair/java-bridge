@@ -1,8 +1,11 @@
 package bridge.controller;
 
+import bridge.BridgeRandomNumberGenerator;
 import bridge.domain.BridgeGame;
+import bridge.domain.BridgeMaker;
 import bridge.ui.InputView;
 import bridge.ui.OutputView;
+import java.util.List;
 
 public class BridgeController {
     private BridgeGame bridgeGame;
@@ -12,38 +15,47 @@ public class BridgeController {
     public BridgeController() {
         this.inputView = new InputView();
         this.outputView = new OutputView();
+        List<String> bridge = makeBridge();
+        this.bridgeGame = new BridgeGame(bridge);
     }
 
-    public void playGame() {
-        while (!this.bridgeGame.inEnd()) {
-            playTurn();
-        }
-        printResultOfMove();
+    private List<String> makeBridge() {
+        BridgeRandomNumberGenerator bridgeRandomNumberGenerator = new BridgeRandomNumberGenerator();
+        BridgeMaker bridgeMaker = new BridgeMaker(bridgeRandomNumberGenerator);
+        int bridgeSize = inputView.readBridgeSize();
+        return bridgeMaker.makeBridge(bridgeSize);
     }
 
-    private void playTurn() {
-        while (this.bridgeGame.isNotOnWay()) {
-            String inputDirection = inputView.readMoving();
-            this.bridgeGame.move(inputDirection);
-            printResultOfGame();
-        }
-        if (this.bridgeGame.isFail) {
-            retryTurn();
-        }
-    }
-
-    private void retryTurn() {
-       String inputGameCommand = inputView.readGameCommand();
-       this.bridgeGame.retry(inputGameCommand);
-    }
-
-    private void printResultOfMove() {
-        String resultNow = this.bridgeGame.getResult();
-        this.outputView.printMap(resultNow);
-    }
-
-    private void printResultOfGame() {
-        String resultNow = this.bridgeGame.getResult();
-        this.outputView.printResult(resultNow);
-    }
+//    public void playGame() {
+//        while (!this.bridgeGame.inEnd()) {
+//            playTurn();
+//        }
+//        printResultOfMove();
+//    }
+//
+//    private void playTurn() {
+//        while (this.bridgeGame.isNotOnWay()) {
+//            String inputDirection = inputView.readMoving();
+//            this.bridgeGame.move(inputDirection);
+//            printResultOfGame();
+//        }
+//        if (this.bridgeGame.isFail) {
+//            retryTurn();
+//        }
+//    }
+//
+//    private void retryTurn() {
+//       String inputGameCommand = inputView.readGameCommand();
+//       this.bridgeGame.retry(inputGameCommand);
+//    }
+//
+//    private void printResultOfMove() {
+//        String resultNow = this.bridgeGame.getResult();
+//        this.outputView.printMap(resultNow);
+//    }
+//
+//    private void printResultOfGame() {
+//        String resultNow = this.bridgeGame.getResult();
+//        this.outputView.printResult(resultNow);
+//    }
 }
