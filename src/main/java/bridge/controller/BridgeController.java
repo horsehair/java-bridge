@@ -15,6 +15,7 @@ public class BridgeController {
     public BridgeController() {
         this.inputView = new InputView();
         this.outputView = new OutputView();
+        this.outputView.announceStartGame();
         List<String> bridge = makeBridge();
         this.bridgeGame = new BridgeGame(bridge);
     }
@@ -34,7 +35,7 @@ public class BridgeController {
     }
 //
     private void playTurn() {
-        String moving = inputView.readMoving();
+        String moving = this.inputView.readMoving();
         this.bridgeGame.move(moving);
         if (this.bridgeGame.isEnd()) {
             return;
