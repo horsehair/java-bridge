@@ -21,13 +21,13 @@ public class OutputView {
      */
     public void printMap(List<String> userRecord, boolean isCorrect) {
         if (isCorrect) {
-            printMapOnWay(userRecord, isCorrect);
+            printMapOnWay(userRecord);
             return;
         }
-//        printMapOnFail(userRecord, isCorrect);
+        printMapOnFail(userRecord);
     }
 
-    private void printMapOnWay(List<String> userRecord, boolean isCorrect) {
+    private void printMapOnWay(List<String> userRecord) {
         StringBuilder upperLine = new StringBuilder(START_BRACKET);
         StringBuilder lowerLine = new StringBuilder(START_BRACKET);
         userRecord.forEach(moving -> {
@@ -43,6 +43,31 @@ public class OutputView {
         int length = upperLine.length();
         upperLine.replace(length-1, length, END_BRACKET);
         lowerLine.replace(length-1, length, END_BRACKET);
+        System.out.println(upperLine.toString() + "\n" + lowerLine.toString());
+    }
+
+    private void printMapOnFail(List<String> userRecord) {
+        StringBuilder upperLine = new StringBuilder(START_BRACKET);
+        StringBuilder lowerLine = new StringBuilder(START_BRACKET);
+        userRecord.forEach(moving -> {
+            if (moving.equals("U")) {
+                upperLine.append(CORRECT_MOVING + BETWEEN_LINE);
+                lowerLine.append(SPACE + BETWEEN_LINE);
+            }
+            if (moving.equals("D")) {
+                upperLine.append(SPACE + BETWEEN_LINE);
+                lowerLine.append(CORRECT_MOVING + BETWEEN_LINE);
+            }
+        });
+        int length = upperLine.length();
+        int userRecordSize = userRecord.size();
+        String lastMoving = userRecord.get(userRecordSize - 1);
+        if (lastMoving.equals("U")) {
+            upperLine.replace(length-4, length, WRONG_MOVING + END_BRACKET);
+        }
+        if (lastMoving.equals("D")) {
+            lowerLine.replace(length-4, length, WRONG_MOVING + END_BRACKET);
+        }
         System.out.println(upperLine.toString() + "\n" + lowerLine.toString());
     }
 
