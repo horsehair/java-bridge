@@ -30,18 +30,19 @@ public class BridgeController {
         while (!this.bridgeGame.isEnd()) {
             playTurn();
         }
-        printResultOfGame();
+//        printResultOfGame();
     }
 //
     private void playTurn() {
-        while (!this.bridgeGame.isOnWay()) {
-            String moving = inputView.readMoving();
-            this.bridgeGame.move(moving);
-            printResultOfMove();
+        String moving = inputView.readMoving();
+        this.bridgeGame.move(moving);
+        if (this.bridgeGame.isEnd()) {
+            return;
         }
         if (this.bridgeGame.isFail()) {
 //            retryTurn();
         }
+        printResultOfMove();
     }
 //
 //    private void retryTurn() {
@@ -50,12 +51,13 @@ public class BridgeController {
 //    }
 //
     private void printResultOfMove() {
-        String resultNow = this.bridgeGame.getResult();
-        this.outputView.printMap(resultNow);
+        List<String> userRecord = this.bridgeGame.getUserRecord();
+        boolean isCorrect = this.bridgeGame.isOnWay();
+        this.outputView.printMap(userRecord, isCorrect);
     }
 //
-    private void printResultOfGame() {
-        String resultNow = this.bridgeGame.getResult();
-        this.outputView.printResult(resultNow);
-    }
+//    private void printResultOfGame() {
+//        List<String> resultNow = this.bridgeGame.getUserRecord();
+//        this.outputView.printResult(resultNow);
+//    }
 }
