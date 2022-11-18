@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class OutputView {
     private static final String START_GAME_ANNOUNCEMENT = "다리 건너기 게임을 시작합니다.";
+    private static final String END_GAME_ANNOUNCEMENT = "최종 게임 결과";
     private static final String START_BRACKET = "[";
     private static final String SPACE = "   ";
     private static final String CORRECT_MOVING = " O ";
@@ -81,5 +82,9 @@ public class OutputView {
 
     public void announceStartGame() {
         System.out.println(START_GAME_ANNOUNCEMENT);
+    }
+
+    public void announceEndGame() {
+        System.out.println(END_GAME_ANNOUNCEMENT);
     }
 }

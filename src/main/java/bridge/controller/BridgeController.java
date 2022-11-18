@@ -31,16 +31,20 @@ public class BridgeController {
         while (!this.bridgeGame.isEnd()) {
             playTurn();
         }
-//        printResultOfGame();
+        if (this.bridgeGame.checkIsRightEnd()) {
+            System.out.println();
+        }
+        outputView.announceEndGame();
+        printResultOfMove();
     }
-//
+
     private void playTurn() {
         String moving = this.inputView.readMoving();
         this.bridgeGame.move(moving);
+        printResultOfMove();
         if (this.bridgeGame.isEnd()) {
             return;
         }
-        printResultOfMove();
         if (this.bridgeGame.isFail()) {
             retryTurn();
         }
@@ -54,6 +58,11 @@ public class BridgeController {
     private void printResultOfMove() {
         List<String> userRecord = this.bridgeGame.getUserRecord();
         boolean isCorrect = this.bridgeGame.isOnWay();
+        if (this.bridgeGame.isEnd()) {
+            if (this.bridgeGame.isSameSizeBridgeAndUserRecord()) {
+                isCorrect = this.bridgeGame.checkIsRightEnd();
+            }
+        }
         this.outputView.printMap(userRecord, isCorrect);
     }
 //

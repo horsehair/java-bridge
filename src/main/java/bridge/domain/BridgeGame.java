@@ -14,6 +14,7 @@ import java.util.List;
 public class BridgeGame {
     private final List<String> bridge;
     private GameStatus gameStatus;
+    boolean isEnd;
     private List<String> userRecord;
     private int tryCount;
 
@@ -81,11 +82,32 @@ public class BridgeGame {
         return this.userRecord;
     }
 
-    private void checkIsEnd() {
+    private boolean checkIsEnd() {
         int bridgeSize = this.bridge.size();
         int userTrackingSize = this.userRecord.size();
         if (bridgeSize == userTrackingSize) {
             this.gameStatus = END;
+            return true;
         }
+        return false;
+    }
+
+    public boolean checkIsRightEnd() {
+        if (!isSameSizeBridgeAndUserRecord()) {
+            return false;
+        }
+        int bridgeSize = this.bridge.size();
+        String lastOfBridge = this.bridge.get(bridgeSize - 1);
+        String lastOfUserRecord = this.userRecord.get(bridgeSize - 1);
+        if (lastOfUserRecord.equals(lastOfBridge)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isSameSizeBridgeAndUserRecord() {
+        int bridgeSize = this.bridge.size();
+        int userTrackingSize = this.userRecord.size();
+        return bridgeSize == userTrackingSize;
     }
 }
