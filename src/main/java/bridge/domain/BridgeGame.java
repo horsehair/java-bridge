@@ -1,5 +1,10 @@
 package bridge.domain;
 
+import static bridge.constant.GameStatus.ON_WAY;
+import static bridge.constant.GameStatus.FAIL;
+import static bridge.constant.GameStatus.END;
+
+import bridge.constant.GameStatus;
 import java.util.List;
 
 /**
@@ -7,9 +12,12 @@ import java.util.List;
  */
 public class BridgeGame {
     private final List<String> bridge;
+    private GameStatus gameStatus;
 
     public BridgeGame(List<String> bridge) {
         this.bridge = bridge;
+        this.gameStatus = ON_WAY;
+        System.out.println(this.bridge);
     }
 
     /**
@@ -26,5 +34,17 @@ public class BridgeGame {
      * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
     public void retry() {
+    }
+
+    public boolean isOnWay() {
+        return this.gameStatus == ON_WAY;
+    }
+
+    public boolean isFail() {
+        return this.gameStatus == FAIL;
+    }
+
+    public boolean isEnd() {
+        return this.gameStatus == END;
     }
 }

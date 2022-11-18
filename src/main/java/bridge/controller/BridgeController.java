@@ -26,33 +26,33 @@ public class BridgeController {
         return bridgeMaker.makeBridge(bridgeSize);
     }
 
-//    public void playGame() {
-//        while (!this.bridgeGame.inEnd()) {
-//            playTurn();
-//        }
-//        printResultOfMove();
-//    }
+    public void playGame() {
+        while (!this.bridgeGame.isEnd()) {
+            playTurn();
+        }
+        printResultOfMove();
+    }
 //
-//    private void playTurn() {
-//        while (this.bridgeGame.isNotOnWay()) {
-//            String inputDirection = inputView.readMoving();
-//            this.bridgeGame.move(inputDirection);
-//            printResultOfGame();
-//        }
-//        if (this.bridgeGame.isFail) {
+    private void playTurn() {
+        while (!this.bridgeGame.isOnWay()) {
+            String inputDirection = inputView.readMoving();
+            this.bridgeGame.move(inputDirection);
+            printResultOfGame();
+        }
+        if (this.bridgeGame.isFail()) {
 //            retryTurn();
-//        }
-//    }
+        }
+    }
 //
 //    private void retryTurn() {
 //       String inputGameCommand = inputView.readGameCommand();
 //       this.bridgeGame.retry(inputGameCommand);
 //    }
 //
-//    private void printResultOfMove() {
-//        String resultNow = this.bridgeGame.getResult();
-//        this.outputView.printMap(resultNow);
-//    }
+    private void printResultOfMove() {
+        String resultNow = this.bridgeGame.getResult();
+        this.outputView.printMap(resultNow);
+    }
 //
 //    private void printResultOfGame() {
 //        String resultNow = this.bridgeGame.getResult();
