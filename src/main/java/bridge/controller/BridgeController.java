@@ -35,8 +35,8 @@ public class BridgeController {
 //
     private void playTurn() {
         while (!this.bridgeGame.isOnWay()) {
-            String inputDirection = inputView.readMoving();
-            this.bridgeGame.move(inputDirection);
+            String moving = inputView.readMoving();
+            this.bridgeGame.move(moving);
             printResultOfGame();
         }
         if (this.bridgeGame.isFail()) {
